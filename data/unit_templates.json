@@ -31,6 +31,62 @@
       "base_ldr": 50,
       "speed": 10,
       "role": "Support"
+    },
+    "necromancer": {
+      "base_hp": 60,
+      "base_atk": 30,
+      "base_def": 5,
+      "base_ldr": 55,
+      "speed": 10,
+      "role": "Support/Specialist"
+    },
+    "assassin": {
+      "base_hp": 70,
+      "base_atk": 30,
+      "base_def": 6,
+      "base_ldr": 45,
+      "speed": 16,
+      "role": "DPS/Rogue"
+    },
+    "sniper": {
+      "base_hp": 70,
+      "base_atk": 42,
+      "base_def": 5,
+      "base_ldr": 52,
+      "speed": 12,
+      "role": "DPS/Ranged"
+    },
+    "assault": {
+      "base_hp": 95,
+      "base_atk": 32,
+      "base_def": 12,
+      "base_ldr": 30,
+      "speed": 10,
+      "role": "Tank/Assault"
+    },
+    "artillery": {
+      "base_hp": 95,
+      "base_atk": 32,
+      "base_def": 12,
+      "base_ldr": 30,
+      "speed": 10,
+      "role": "Artillery/Ranged"
+    },
+    "scout": {
+      "base_hp": 80,
+      "base_atk": 28,
+      "base_def": 12,
+      "base_ldr": 40,
+      "speed": 16,
+      "role": "Tank/DPS"
+    },
+    "tactical": {
+      "base_hp": 80,
+      "base_atk": 28,
+      "base_def": 12,
+      "base_ldr": 40,
+      "speed": 16,
+      "role": "Support/Tactical"
     }
   },
   "rarity_multipliers": {
