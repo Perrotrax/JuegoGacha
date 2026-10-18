@@ -1,0 +1,50 @@
+[
+  {
+    "id": "noble_blood",
+    "name": "Cuna de Noble",
+    "description": "Aumenta el stat base de Liderazgo (LDR) y la retención moral.",
+    "effects": {
+      "ldr_bonus": 5,
+      "morale_decay_reduction": 0.2
+    }
+  },
+  {
+    "id": "prodigious_mind",
+    "name": "Mente Prodigiosa",
+    "description": "Incrementa la velocidad de reacción y la toma de decisiones tácticas autónomas.",
+    "effects": {
+      "reaction_time_mult": 0.85,
+      "tactical_iq_bonus": 20,
+      "ldr_gain_multiplier": 3.0
+    }
+  },
+  {
+    "id": "scarred_veteran",
+    "name": "Veterano de Mercenarios",
+    "description": "Inicia con experiencia de mando y aprende tácticas un 50% más rápido.",
+    "effects": {
+      "ldr_bonus": 10,
+      "ldr_gain_multiplier": 1.5,
+      "permadeath_resist": 0.25,
+      "trauma_threshold": 15
+    }
+  },
+  {
+    "id": "cursed_anomaly",
+    "name": "Anomalía Oscura",
+    "description": "Potencial destructivo descomunal a costa de baja obediencia y alta inestabilidad.",
+    "effects": {
+      "attack_power_mult": 1.4,
+      "autonomy_rebellion_chance": 0.15
+    }
+  },
+  {
+    "id": "conqueror_blood",
+    "name": "Sangre de Conquistador",
+    "description": "Nace con mando innato y un potencial de liderazgo superior.",
+    "effects": {
+      "ldr_bonus": 15,
+      "ldr_cap_bonus": 15
+    }
+  }
+]
