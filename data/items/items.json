@@ -25,5 +25,15 @@
     "effect": {
       "tactical_power": 100
     }
+  },
+  {
+    "id": "Dragon_Sword",
+    "name": "Espada del Dragón",
+    "type": "weapon",
+    "description": "Espada legendaria forjada con lagrimas de drake del pantano y colmillos de dragon primordial.",
+    "effect": {
+      "attack": 100,
+      "critical_hit_chance": 0.50
+    }
   }
 ]
