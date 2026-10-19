@@ -1,0 +1,18 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "GDScript: Ejecutar Proyecto Santuario (Godot 4)",
+      "type": "godot",
+      "request": "launch",
+      "project": "${workspaceFolder}/godot_project"
+    },
+    {
+      "name": "GDScript: Ejecutar Escena Actual",
+      "type": "godot",
+      "request": "launch",
+      "project": "${workspaceFolder}/godot_project",
+      "scene": "current"
+    }
+  ]
+}

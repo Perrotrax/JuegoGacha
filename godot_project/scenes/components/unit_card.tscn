@@ -1,0 +1,93 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7m5y3b2qk1p8"]
+
+[ext_resource type="Script" path="res://scripts/ui/unit_card.gd" id="1_x8d4p"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card"]
+bg_color = Color(0.12, 0.14, 0.18, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.24, 0.28, 0.36, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="UnitCard" type="PanelContainer"]
+custom_minimum_size = Vector2(220, 160)
+theme_override_styles/panel = SubResource("StyleBoxFlat_card")
+script = ExtResource("1_x8d4p")
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBox" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Header" type="HBoxContainer" parent="Margin/VBox"]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="Margin/VBox/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 14
+text = "Aiden Rompefilos"
+text_overrun_behavior = 3
+
+[node name="RarityLabel" type="Label" parent="Margin/VBox/Header"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "SSR"
+horizontal_alignment = 2
+
+[node name="ClassLabel" type="Label" parent="Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.7, 0.8, 1)
+theme_override_font_sizes/font_size = 12
+text = "Guardian - Oficial"
+
+[node name="HPContainer" type="VBoxContainer" parent="Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="HPLabel" type="Label" parent="Margin/VBox/HPContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "HP: 120/120"
+
+[node name="HPBar" type="ProgressBar" parent="Margin/VBox/HPContainer"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 0)
+value = 100.0
+show_percentage = false
+
+[node name="LDRContainer" type="VBoxContainer" parent="Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="LDRLabel" type="Label" parent="Margin/VBox/LDRContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.7, 1, 1)
+theme_override_font_sizes/font_size = 11
+text = "LDR: 35/50"
+
+[node name="LDRBar" type="ProgressBar" parent="Margin/VBox/LDRContainer"]
+custom_minimum_size = Vector2(0, 6)
+layout_mode = 2
+value = 70.0
+show_percentage = false
+
+[node name="StatusBadge" type="Label" parent="Margin/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "[ACTIVO]"
+horizontal_alignment = 1
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

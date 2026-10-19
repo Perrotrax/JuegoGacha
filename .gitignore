@@ -1,6 +1,17 @@
-__pycache__/
-*.py[cod]
-*$py.class
-*.env
-.venv/
-env/
+# Godot 4 - Archivos del Editor
+godot_project/.godot/
+
+# Exportaciones compiladas
+*.apk
+*.aab
+*.exe
+*.x86_64
+*.arm64
+*.app
+
+# macOS
+.DS_Store
+Thumbs.db
+
+# VS Code / Cursor
+.vscode/settings.json

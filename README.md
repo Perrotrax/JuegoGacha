@@ -1,96 +1,75 @@
-# Proyecto Santuario - Gacha RPG & Simulación Autónoma
+# Proyecto Santuario — Gacha RPG en Godot 4
 
-Un sistema RPG gacha con simulación táctica, mecánicas de liderazgo (**LDR**), gestión de santuario y resolución dinámica de **Permadeath vs Herida Crítica**.
+RPG gacha táctico con mecánicas de liderazgo (**LDR**), gestión de base (Santuario), sistema de hospital y resolución dinámica de **Permadeath vs Herida Crítica**. Desarrollado en **Godot Engine 4** con **GDScript**.
 
 ---
 
 ## 🏛️ Estructura del Proyecto
 
 ```text
-├── assets/                  # Recursos multimedia
-│   ├── audio/ (music, sfx)
-│   ├── fonts/
-│   └── sprites/ (environment, UI, units)
-├── data/                    # Bases de datos y configuraciones JSON
-│   ├── items/items.json
-│   ├── traits.json          # Rasgos de nacimiento (Cuna de Noble, Mente Prodigiosa, etc.)
-│   └── unit_templates.json  # Clases, rarezas, multiplicadores de stats y pull rates
-├── src/                     # Código fuente
-│   ├── core/                # Loop principal, control de estados (FSM) y modo offline/online
-│   │   ├── app.py
-│   │   ├── game_state.py
-│   │   └── mode_manager.py
-│   ├── entities/            # Entidades y estadísticas
-│   │   ├── base_unit.py     # Clase base de combatientes y estados vitales
-│   │   ├── leadership.py    # Lógica de stat LDR, LDR Cap y tiers tácticos
-│   │   ├── traits.py        # Pasivos y rasgos de nacimiento
-│   │   └── hero.py          # Héroes legendarios y jefes sometidos
-│   ├── systems/             # Subsistemas mecánicos
-│   │   ├── combat/          # Daño, enfrentamientos y cálculo de permadeath vs herida
-│   │   ├── gacha/           # Invocación de tropas, rarezas y anomalías
-│   │   ├── hospital/        # Enfermería, camillas y cirujanos
-│   │   ├── inventory/       # Items, pociones y catalizadores
-│   │   ├── sanctuary/       # Módulos de la base y progresión autónoma offline
-│   │   └── tactics/         # Intervención en vivo (Escudo de Sangre, Portal de Evacuación)
-│   ├── ai/                  # Árbol de comportamiento y lógica por LDR
-│   │   ├── behavior_tree.py
-│   │   └── autonomy_logic.py
-│   ├── ui/                  # HUD y pantallas de visualización
-│   │   ├── components/      # Barras de vida, gauges de LDR y badges
-│   │   ├── camera_eval.py   # Pantalla de la "Cámara de Evaluación"
-│   │   └── log_viewer.py    # Bitácora oficial del Santuario
-│   └── utils/               # Loggers y generadores probabilísticos
-│       ├── logger.py
-│       └── RNG.py
-├── tests/                   # Pruebas unitarias de sistemas
-├── main.py                  # Script ejecutor del juego
-└── README.md
+├── godot_project/              # Proyecto Godot 4 (fuente principal del juego)
+│   ├── project.godot           # Configuración del proyecto
+│   ├── data/                   # Plantillas de unidades, rarezas y rasgos
+│   │   ├── unit_templates.json
+│   │   └── traits.json
+│   ├── scripts/
+│   │   ├── autoload/
+│   │   │   └── game_manager.gd # Singleton global: Roster, Éter, Hospital, Logs
+│   │   ├── models/
+│   │   │   └── unit.gd         # Clase Unit (stats, LDR tiers, estados vitales)
+│   │   ├── systems/
+│   │   │   ├── gacha_system.gd # Invocación y detección de anomalías UR
+│   │   │   └── combat_system.gd# Combate por rondas y resolución de fatalidad
+│   │   └── ui/
+│   │       ├── main_menu.gd    # Controlador de navegación por pestañas
+│   │       └── unit_card.gd    # Tarjeta visual de unidad
+│   └── scenes/
+│       ├── main_menu.tscn      # Escena principal del juego
+│       └── components/
+│           └── unit_card.tscn  # Componente reutilizable de tarjeta
+├── run_godot.bat               # Ejecuta el juego directamente
+├── run_godot_editor.bat        # Abre el editor de Godot en el proyecto
+└── .vscode/
+    └── launch.json             # Configuración de debug con la extensión godot-tools
 ```
 
 ---
 
-## ⚡ Características Principales
+## ⚡ Mecánicas del Juego
 
-1. **Liderazgo (LDR) & LDR Cap**:
-   - Cada unidad posee un límite biológico/mágico (`ldr_cap`) y un nivel de liderazgo actual (`ldr`).
-   - Define el nivel de autonomía táctica y la probabilidad de acatar órdenes en combate manual o huir en pánico.
-
-2. **Permadeath vs Herida Crítica**:
-   - Cuando una unidad llega a 0 HP, se calcula su destino según su resistencia, rango de LDR y azar:
-     - **Herida Crítica**: La unidad sobrevive inconsciente y es trasladada al Hospital.
-     - **Permadeath**: La unidad muere definitivamente y se registra en la bitácora.
-
-3. **Hospital y Cirugías**:
-   - Camillas limitadas, asignación de cirujanos y turnos de convalecencia.
-
-4. **Santuario y Progresión Autónoma (Offline)**:
-   - Acuartela unidades para que entrenen su LDR de forma pasiva mientras se genera Éter para mejorar las instalaciones.
-
-5. **Intervención en Vivo (Tácticas)**:
-   - Habilidades de intervención en tiempo real como el **Portal de Evacuación** o el **Escudo de Sangre**.
+1. **Invocación Gacha**: Tasas N/R/SR/SSR/UR con posibilidad de anomalía UR trascendente.
+2. **Liderazgo (LDR)**: Cada unidad tiene un LDR actual y un cap biológico. Define su tier táctico: desde *Tropa Ciega* hasta *Mariscal Absoluto*.
+3. **Combate por rondas**: Escaramuzas por velocidad, daño con variación ±15%.
+4. **Permadeath vs Hospital**: Al caer a 0 HP, se resuelve supervivencia o muerte definitiva según el LDR del personaje.
+5. **Santuario (Ciclos)**: Genera Éter pasivo y entrena LDR de las tropas acuarteladas.
+6. **Hospital**: Hasta 4 camillas de cuidados intensivos con ciclos de convalecencia o cura rápida con Éter.
 
 ---
 
 ## 🚀 Cómo Ejecutar
 
-### Interfaz gráfica de escritorio
-```bash
-python main.py --gui
+### Opción 1: Lanzadores de script
+```bat
+:: Ejecutar el juego directamente
+run_godot.bat
+
+:: Abrir el editor visual de Godot
+run_godot_editor.bat
 ```
 
-Permite reclutar, consultar el roster, simular combates, avanzar el tiempo, usar tácticas y revisar la bitácora desde una ventana.
+### Opción 2: Desde VS Code / Cursor (F5)
+1. Presiona `Ctrl + Shift + D`.
+2. Selecciona **"GDScript: Ejecutar Proyecto Santuario (Godot 4)"**.
+3. Presiona **F5**.
 
-### 1. Ejecutar la demo automática completa de todos los sistemas:
-```bash
-python main.py --demo
-```
+### Opción 3: Importar manualmente en Godot
+1. Abre **Godot Engine 4**.
+2. Haz clic en **Importar** y selecciona `godot_project/project.godot`.
+3. Presiona **F5** dentro del editor.
 
-### 2. Ejecutar el menú interactivo:
-```bash
-python main.py
-```
+---
 
-### 3. Ejecutar las pruebas unitarias:
-```bash
-python -m unittest discover tests
-```
+## 🛠️ Requisitos
+
+- **Godot Engine 4.7.x** (instalado en `%LOCALAPPDATA%\Microsoft\WinGet\Packages\` vía winget)
+- **Extensión VS Code**: `geequlim.godot-tools` v2.7.1 (ya instalada)

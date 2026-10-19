@@ -1,0 +1,339 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5s7m8x4w2q1e"]
+
+[ext_resource type="Script" path="res://scripts/ui/main_menu.gd" id="1_4n5kd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_topbar"]
+bg_color = Color(0.09, 0.11, 0.15, 1)
+border_width_bottom = 2
+border_color = Color(0.2, 0.25, 0.35, 1)
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4n5kd")
+
+[node name="MainContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="TopBar" type="PanelContainer" parent="MainContainer"]
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_topbar")
+
+[node name="Margin" type="MarginContainer" parent="MainContainer/TopBar"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 8
+
+[node name="HBox" type="HBoxContainer" parent="MainContainer/TopBar/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Title" type="Label" parent="MainContainer/TopBar/Margin/HBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.75, 0.3, 1)
+theme_override_font_sizes/font_size = 18
+text = "🏛️ PROYECTO SANTUARIO"
+
+[node name="VSeparator" type="VSeparator" parent="MainContainer/TopBar/Margin/HBox"]
+layout_mode = 2
+
+[node name="AetherCounter" type="HBoxContainer" parent="MainContainer/TopBar/Margin/HBox"]
+layout_mode = 2
+
+[node name="AetherLabel" type="Label" parent="MainContainer/TopBar/Margin/HBox/AetherCounter"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.8, 1, 1)
+theme_override_font_sizes/font_size = 15
+text = "Éter: 150"
+
+[node name="InfoContainer" type="HBoxContainer" parent="MainContainer/TopBar/Margin/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
+
+[node name="UnitsLabel" type="Label" parent="MainContainer/TopBar/Margin/HBox/InfoContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Tropas: 2 (2 listas)"
+
+[node name="HospitalLabel" type="Label" parent="MainContainer/TopBar/Margin/HBox/InfoContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.7, 0.3, 1)
+theme_override_font_sizes/font_size = 13
+text = "Hospital: 0/4"
+
+[node name="BtnAdvanceCycle" type="Button" parent="MainContainer/TopBar/Margin/HBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "⏳ Avanzar Ciclo (+Éter / LDR)"
+
+[node name="TabContainer" type="TabContainer" parent="MainContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+current_tab = 0
+
+[node name="Santuario" type="MarginContainer" parent="MainContainer/TabContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MainContainer/TabContainer/Santuario"]
+layout_mode = 2
+
+[node name="UnitsGrid" type="HFlowContainer" parent="MainContainer/TabContainer/Santuario/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+
+[node name="Reclutar" type="MarginContainer" parent="MainContainer/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 24
+
+[node name="VBox" type="VBoxContainer" parent="MainContainer/TabContainer/Reclutar"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="GachaTitle" type="Label" parent="MainContainer/TabContainer/Reclutar/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Portal de Invocación y Resonancia de Anomalías"
+horizontal_alignment = 1
+
+[node name="GachaDesc" type="Label" parent="MainContainer/TabContainer/Reclutar/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.75, 0.85, 1)
+theme_override_font_sizes/font_size = 13
+text = "Invoca nuevos guerreros a tu Santuario. Tasa de anomalía latente UR: 0.01% (o potenciada por catalizador)."
+horizontal_alignment = 1
+
+[node name="Buttons" type="HBoxContainer" parent="MainContainer/TabContainer/Reclutar/VBox"]
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 24
+
+[node name="BtnRecruit" type="Button" parent="MainContainer/TabContainer/Reclutar/VBox/Buttons"]
+custom_minimum_size = Vector2(200, 48)
+layout_mode = 2
+text = "Invocar x1 (50 Éter)"
+
+[node name="BtnRecruitCatalyst" type="Button" parent="MainContainer/TabContainer/Reclutar/VBox/Buttons"]
+custom_minimum_size = Vector2(240, 48)
+layout_mode = 2
+text = "Invocar con Catalizador (+5% UR)"
+
+[node name="ResultCard" type="PanelContainer" parent="MainContainer/TabContainer/Reclutar/VBox"]
+visible = false
+custom_minimum_size = Vector2(400, 160)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Margin" type="MarginContainer" parent="MainContainer/TabContainer/Reclutar/VBox/ResultCard"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBox" type="VBoxContainer" parent="MainContainer/TabContainer/Reclutar/VBox/ResultCard/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="NameLabel" type="Label" parent="MainContainer/TabContainer/Reclutar/VBox/ResultCard/Margin/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "¡Aiden Rompefilos!"
+horizontal_alignment = 1
+
+[node name="DetailsLabel" type="Label" parent="MainContainer/TabContainer/Reclutar/VBox/ResultCard/Margin/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Rareza: SSR | Clase: Guardian"
+horizontal_alignment = 1
+
+[node name="StatsLabel" type="Label" parent="MainContainer/TabContainer/Reclutar/VBox/ResultCard/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.75, 0.8, 0.9, 1)
+theme_override_font_sizes/font_size = 13
+text = "HP: 240 | ATK: 24 | DEF: 36 | LDR: 40/65"
+horizontal_alignment = 1
+
+[node name="Escaramuza" type="MarginContainer" parent="MainContainer/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBox" type="VBoxContainer" parent="MainContainer/TabContainer/Escaramuza"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="StatusLabel" type="Label" parent="MainContainer/TabContainer/Escaramuza/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.8, 0.3, 1)
+theme_override_font_sizes/font_size = 15
+text = "Pulsa 'Iniciar Escaramuza' para desplegar tu escuadra contra hostiles generados."
+horizontal_alignment = 1
+
+[node name="Arena" type="HBoxContainer" parent="MainContainer/TabContainer/Escaramuza/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 24
+
+[node name="AllySquad" type="VBoxContainer" parent="MainContainer/TabContainer/Escaramuza/VBox/Arena"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="VSeparator" type="VSeparator" parent="MainContainer/TabContainer/Escaramuza/VBox/Arena"]
+layout_mode = 2
+
+[node name="EnemySquad" type="VBoxContainer" parent="MainContainer/TabContainer/Escaramuza/VBox/Arena"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="Actions" type="HBoxContainer" parent="MainContainer/TabContainer/Escaramuza/VBox"]
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 16
+
+[node name="BtnStartCombat" type="Button" parent="MainContainer/TabContainer/Escaramuza/VBox/Actions"]
+custom_minimum_size = Vector2(180, 40)
+layout_mode = 2
+text = "⚔️ Iniciar Escaramuza"
+
+[node name="BtnNextRound" type="Button" parent="MainContainer/TabContainer/Escaramuza/VBox/Actions"]
+custom_minimum_size = Vector2(180, 40)
+layout_mode = 2
+disabled = true
+text = "▶ Ejecutar Ronda"
+
+[node name="CombatLog" type="Label" parent="MainContainer/TabContainer/Escaramuza/VBox"]
+custom_minimum_size = Vector2(0, 90)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.8, 0.8, 1)
+theme_override_font_sizes/font_size = 12
+text = "Registro de combate en espera..."
+autowrap_mode = 2
+
+[node name="Hospital" type="MarginContainer" parent="MainContainer/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MainContainer/TabContainer/Hospital"]
+layout_mode = 2
+
+[node name="BedsGrid" type="HFlowContainer" parent="MainContainer/TabContainer/Hospital/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+
+[node name="Evaluacion" type="MarginContainer" parent="MainContainer/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 20
+
+[node name="VBox" type="VBoxContainer" parent="MainContainer/TabContainer/Evaluacion"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="TopSelect" type="HBoxContainer" parent="MainContainer/TabContainer/Evaluacion/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="MainContainer/TabContainer/Evaluacion/VBox/TopSelect"]
+layout_mode = 2
+text = "Seleccionar Unidad:"
+
+[node name="UnitOptionButton" type="OptionButton" parent="MainContainer/TabContainer/Evaluacion/VBox/TopSelect"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+
+[node name="Details" type="PanelContainer" parent="MainContainer/TabContainer/Evaluacion/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Info" type="VBoxContainer" parent="MainContainer/TabContainer/Evaluacion/VBox/Details"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="NameLabel" type="Label" parent="MainContainer/TabContainer/Evaluacion/VBox/Details/Info"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Aiden Rompefilos"
+
+[node name="ClassLabel" type="Label" parent="MainContainer/TabContainer/Evaluacion/VBox/Details/Info"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.7, 0.8, 1)
+theme_override_font_sizes/font_size = 14
+text = "Clase: Guardian | Rareza: SSR | Estado: ACTIVO"
+
+[node name="HSeparator" type="HSeparator" parent="MainContainer/TabContainer/Evaluacion/VBox/Details/Info"]
+layout_mode = 2
+
+[node name="StatsLabel" type="Label" parent="MainContainer/TabContainer/Evaluacion/VBox/Details/Info"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "HP: 240 | ATK: 24 | DEF: 36 | VEL: 8"
+
+[node name="LDRLabel" type="Label" parent="MainContainer/TabContainer/Evaluacion/VBox/Details/Info"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.7, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "Liderazgo (LDR): 35/50 (Oficial Táctico - Tier 3)"
+
+[node name="TraitsLabel" type="Label" parent="MainContainer/TabContainer/Evaluacion/VBox/Details/Info"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.9, 0.7, 1)
+theme_override_font_sizes/font_size = 13
+text = "Rasgos de Nacimiento: ..."
+
+[node name="Bitacora" type="MarginContainer" parent="MainContainer/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="LogTextEdit" type="TextEdit" parent="MainContainer/TabContainer/Bitacora"]
+layout_mode = 2
+editable = false
+wrap_mode = 1
+
+[connection signal="pressed" from="MainContainer/TopBar/Margin/HBox/BtnAdvanceCycle" to="." method="_on_btn_advance_cycle_pressed"]
+[connection signal="pressed" from="MainContainer/TabContainer/Reclutar/VBox/Buttons/BtnRecruit" to="." method="_on_btn_recruit_pressed"]
+[connection signal="pressed" from="MainContainer/TabContainer/Reclutar/VBox/Buttons/BtnRecruitCatalyst" to="." method="_on_btn_recruit_catalyst_pressed"]
+[connection signal="pressed" from="MainContainer/TabContainer/Escaramuza/VBox/Actions/BtnStartCombat" to="." method="_on_btn_start_combat_pressed"]
+[connection signal="pressed" from="MainContainer/TabContainer/Escaramuza/VBox/Actions/BtnNextRound" to="." method="_on_btn_next_round_pressed"]
+[connection signal="item_selected" from="MainContainer/TabContainer/Evaluacion/VBox/TopSelect/UnitOptionButton" to="." method="_on_unit_option_selected"]
